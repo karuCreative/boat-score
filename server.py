@@ -50,4 +50,4 @@ if __name__=='__main__':
  import os
  os.chdir(Path(__file__).resolve().parent)
  print('ブラウザで http://localhost:8765 を開いてください')
- ThreadingHTTPServer(('127.0.0.1',8765),Handler).serve_forever()
+ ThreadingHTTPServer(('0.0.0.0', int(os.environ.get('PORT', 10000))), Handler).serve_forever()
