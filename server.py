@@ -42,7 +42,7 @@ class Handler(SimpleHTTPRequestHandler):
     name=re.sub(r'^.*?'+reg.group(1)+r'\s*/\s*'+reg.group(2),'',raw[idx]).split(' / ')[0].strip()
     boats.append({'boat':number,'name':name,'grade':reg.group(2),'win':float(win.group()),'st':float(st.group()),'motor':float(motor_numbers[0])})
    if len(boats)!=6:raise ValueError('公式ページの6艇分を正確に解析できませんでした。ページ構造変更や未開催の可能性があります。誤った採点を防ぐため表示しません。')
-   self.reply(200,{'boats':boats,'source':response.url,'deadline':deadline})
+   self.reply(200,{'boats':boats,'source':response.url})
   except Exception as e:self.reply(422,{'error':str(e)})
  def reply(self,status,obj):
   data=json.dumps(obj,ensure_ascii=False).encode();self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
