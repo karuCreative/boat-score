@@ -54,5 +54,5 @@ def origin_ok(headers):
     if not origin:return False
     try:
         a=urlparse(origin); host=headers.get('Host','')
-        return a.scheme=='https' and a.netloc==host
+        return a.scheme == 'https' and a.netloc == host.split(':')[0]
     except ValueError:return False
